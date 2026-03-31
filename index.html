@@ -280,80 +280,57 @@
 </head>
 
 <body>
-
-    <header>
-        <h1>قائمة المشروبات</h1>
-    </header>
-
-    <div class="item-card">
-        <h3>كابتشينو</h3>
-        <span>25 ليرة</span>
-        <div class="controls">
-            <button onclick="updateQty('cap1', -1, 25, 'كابتشينو')">-</button>
-            <span id="cap1">0</span>
-            <button onclick="updateQty('cap1', 1, 25, 'كابتشينو')">+</button>
-        </div>
-    </div>
-
-    <div id="footerCart"
-        style="display:none; position:fixed; bottom:0; width:100%; background:#fbbf24; padding:15px; text-align:center;">
-        <span style="color:#000; font-weight:bold;">المجموع: <span id="totalDisplay">0</span> ليرة</span>
-        <button onclick="sendToWhatsApp()"
-            style="margin-right:15px; background:#000; color:#fff; border-radius:10px; padding:5px 15px;">أرسل الطلب
-            🚀</button>
-    </div>
     <div class="bg-blobs">
         <div class="blob" style="top: 15%; left: -10%;"></div>
         <div class="blob" style="bottom: 15%; right: -10%; animation-delay: -7s;"></div>
     </div>
 
     <div class="app-shell">
-        <header>
+        <header id="main-header">
             <div class="welcome-text">مرحباً بكم في</div>
             <h1 class="brand-name">مود كافيه</h1>
             <p style="opacity: 0.7; margin: 8px 0 0; font-size: 1rem;">حيث تلتقي الجودة بالفن ✨</p>
-        </header>
+            </header>
 
         <div class="categories-grid">
-
             <a href="hot-drinks.html" class="cat-card">
                 <div class="cat-icon">☕</div>
                 <h3 class="cat-title">ساخن</h3>
             </a>
-
             <a href="cold-drinks.html" class="cat-card">
                 <div class="cat-icon">🍹</div>
                 <h3 class="cat-title">بارد</h3>
             </a>
-
             <a href="desserts.html" class="cat-card">
                 <div class="notify-dot"></div>
                 <div class="cat-icon">🍰</div>
                 <h3 class="cat-title">حلويات</h3>
             </a>
-
             <a href="snacks.html" class="cat-card">
                 <div class="cat-icon">🥪</div>
                 <h3 class="cat-title">سناك</h3>
             </a>
-
             <a href="offers.html" class="cat-card featured">
                 <div class="cat-icon">🎁</div>
                 <div style="text-align: right;">
                     <h3 class="cat-title" style="font-size: 1.3rem;">عروض خاصة</h3>
-                    <p style="margin:2px 0 0; font-size: 0.85rem; opacity: 0.6; color: rgb(160, 159, 159);">اكتشف
-                        خصوماتنا الحصرية</p>
+                    <p style="margin:2px 0 0; font-size: 0.85rem; opacity: 0.6; color: #a09f9f;">اكتشف خصوماتنا الحصرية</p>
                 </div>
             </a>
-
         </div>
 
         <footer>
-            CRAFTED BY YASSIN MOHAMMAD سعید ⚡<br>
+            CRAFTED BY YASSIN MOHAMMAD SAIID ALBAKKOR ⚡<br>
             2026 © ALL RIGHTS RESERVED
         </footer>
     </div>
+
+    <div id="footerCart" style="display:none; position:fixed; bottom:0; left:0; width:100%; background:var(--gold-grad); padding:15px; text-align:center; z-index:9999; border-radius: 25px 25px 0 0; box-shadow: 0 -10px 20px rgba(0,0,0,0.3);">
+        <span style="color:#000; font-weight:bold; font-size: 1.1rem;">المجموع: <span id="totalDisplay">0</span> ليرة</span>
+        <button onclick="sendToWhatsApp()" style="margin-right:15px; background:#000; color:#fff; border:none; border-radius:15px; padding:8px 25px; font-family:'Cairo'; font-weight:bold; cursor:pointer;">
+            إرسال الطلب 🚀
+        </button>
+    </div>
+
     <script src="script.js"></script>
 </body>
-
-</html>
