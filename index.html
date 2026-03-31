@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مود كافيه | تجربة بصرية فريدة ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* لوحة ألوان مستوحاة من القهوة الدافئة والذهب */
+            --bg-overlay: rgba(7, 11, 20, 0.88);
+            /* طبقة تعتيم داكنة وفخمة */
+            --accent-gold: #fbbf24;
+            --gold-grad: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            --glass: rgba(255, 255, 255, 0.02);
+            /* زجاجي شفاف جداً */
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --text-main: #f1f5f9;
+        }
+
+        /* 1. إعدادات الخلفية الصورة الثابتة */
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: #070b14;
+            /* لون احتياطي */
+            /* رابط صورة خلفية جذابة ومجانية عالية الدقة لمقهى دافئ */
+            background-image: url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1500');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* تثبيت الخلفية عند السكرول */
+            font-family: 'Cairo', sans-serif;
+            color: var(--text-main);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* طبقة تعتيم فوق الصورة لتحسين وضوح النص */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-overlay);
+            z-index: 0;
+        }
+
+        /* 2. حركات الخلفية العائمة (تطفو فوق طبقة التعتيم وتحت المحتوى) */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /* الطبقة الثانية */
+            overflow: hidden;
+            pointer-events: none;
+            /* لكي لا تعيق الضغط */
+        }
+
+        .blob {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.12) 0%, transparent 70%);
+            filter: blur(60px);
+            border-radius: 50%;
+            animation: moveBlob 25s infinite alternate ease-in-out;
+        }
+
+        @keyframes moveBlob {
+            from {
+                transform: translate(-20%, -20%) scale(1);
+            }
+
+            to {
+                transform: translate(120%, 120%) scale(1.2);
+            }
+        }
+
+        /* حاوية التطبيق الرئيسية */
+        .app-shell {
+            width: 92%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding-bottom: 50px;
+            position: relative;
+            z-index: 2;
+            /* الطبقة الثالثة (فوق الكل) */
+        }
+
+        /* أنميشن العنوان الاحترافي */
+        header {
+            text-align: center;
+            margin: 60px 0 40px;
+            animation: slideDown 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-text {
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .brand-name {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin: 0;
+            background: var(--gold-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 10px 20px rgba(251, 191, 36, 0.3));
+        }
+
+        /* شبكة التصنيفات مع أنميشن دخول متسلسل (Stagger) */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        /* كرت التصنيف بتأثير زجاجي متطور */
+        .cat-card {
+            position: relative;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 35px;
+            padding: 35px 15px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(25px);
+            /* تأثير الضباب القوي */
+            -webkit-backdrop-filter: blur(25px);
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            /* للبدء بالأنميشن */
+            animation: fadeInScale 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            overflow: hidden;
+        }
+
+        /* أنميشن دخول الكروت */
+        .cat-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .cat-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .cat-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .cat-card:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        .cat-card:nth-child(5) {
+            animation-delay: 1.0s;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.85) translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* حركات التفاعل (Hover/Touch) */
+        .cat-card:hover {
+            border-color: rgba(251, 191, 36, 0.4);
+            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-5px);
+        }
+
+        .cat-card:active {
+            transform: scale(0.94);
+            transition: 0.1s;
+        }
+
+        /* أيقونة تفاعلية تطفو وتضيء */
+        .cat-icon {
+            font-size: 3.8rem;
+            margin-bottom: 18px;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.4));
+        }
+
+        .cat-card:hover .cat-icon {
+            transform: scale(1.2) rotate(8deg);
+            filter: drop-shadow(0 0 20px var(--accent-gold));
+        }
+
+        .cat-title {
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.15rem;
+            margin: 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* كرت عريض مميز بلمسة ذهبية */
+        .featured {
+            grid-column: span 2;
+            flex-direction: row;
+            justify-content: space-around;
+            background: linear-gradient(90deg, rgba(251, 191, 36, 0.15), transparent);
+            padding: 25px 20px;
+        }
+
+        /* نقطة الإشعار النابضة */
+        .notify-dot {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 10px;
+            height: 10px;
+            background: #ff4b2b;
+            border-radius: 50%;
+            animation: pulseNotification 1.8s infinite;
+        }
+
+        @keyframes pulseNotification {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 75, 43, 0.8);
+            }
+
+            70% {
+                transform: scale(1.3);
+                box-shadow: 0 0 0 12px rgba(255, 75, 43, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 75, 43, 0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            opacity: 0.3;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>قائمة المشروبات</h1>
+    </header>
+
+    <div class="item-card">
+        <h3>كابتشينو</h3>
+        <span>25 ليرة</span>
+        <div class="controls">
+            <button onclick="updateQty('cap1', -1, 25, 'كابتشينو')">-</button>
+            <span id="cap1">0</span>
+            <button onclick="updateQty('cap1', 1, 25, 'كابتشينو')">+</button>
+        </div>
+    </div>
+
+    <div id="footerCart"
+        style="display:none; position:fixed; bottom:0; width:100%; background:#fbbf24; padding:15px; text-align:center;">
+        <span style="color:#000; font-weight:bold;">المجموع: <span id="totalDisplay">0</span> ليرة</span>
+        <button onclick="sendToWhatsApp()"
+            style="margin-right:15px; background:#000; color:#fff; border-radius:10px; padding:5px 15px;">أرسل الطلب
+            🚀</button>
+    </div>
+    <div class="bg-blobs">
+        <div class="blob" style="top: 15%; left: -10%;"></div>
+        <div class="blob" style="bottom: 15%; right: -10%; animation-delay: -7s;"></div>
+    </div>
+
+    <div class="app-shell">
+        <header>
+            <div class="welcome-text">مرحباً بكم في</div>
+            <h1 class="brand-name">مود كافيه</h1>
+            <p style="opacity: 0.7; margin: 8px 0 0; font-size: 1rem;">حيث تلتقي الجودة بالفن ✨</p>
+        </header>
+
+        <div class="categories-grid">
+
+            <a href="hot-drinks.html" class="cat-card">
+                <div class="cat-icon">☕</div>
+                <h3 class="cat-title">ساخن</h3>
+            </a>
+
+            <a href="cold-drinks.html" class="cat-card">
+                <div class="cat-icon">🍹</div>
+                <h3 class="cat-title">بارد</h3>
+            </a>
+
+            <a href="desserts.html" class="cat-card">
+                <div class="notify-dot"></div>
+                <div class="cat-icon">🍰</div>
+                <h3 class="cat-title">حلويات</h3>
+            </a>
+
+            <a href="snacks.html" class="cat-card">
+                <div class="cat-icon">🥪</div>
+                <h3 class="cat-title">سناك</h3>
+            </a>
+
+            <a href="offers.html" class="cat-card featured">
+                <div class="cat-icon">🎁</div>
+                <div style="text-align: right;">
+                    <h3 class="cat-title" style="font-size: 1.3rem;">عروض خاصة</h3>
+                    <p style="margin:2px 0 0; font-size: 0.85rem; opacity: 0.6; color: rgb(160, 159, 159);">اكتشف
+                        خصوماتنا الحصرية</p>
+                </div>
+            </a>
+
+        </div>
+
+        <footer>
+            CRAFTED BY YASSIN MOHAMMAD سعید ⚡<br>
+            2026 © ALL RIGHTS RESERVED
+        </footer>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ساندوتشات وسناك | مود كافيه 🥪</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-overlay: rgba(7, 11, 20, 0.92);
+            --accent-gold: #fbbf24;
+            --gold-grad: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            margin: 0; padding: 0;
+            /* صورة خلفية لوجبة خفيفة وساندوتشات مشهية */
+            background: #07141e url('https://images.unsplash.com/photo-1550507992-eb63ffee0847?q=80&w=1000') no-repeat center center fixed;
+            background-size: cover; font-family: 'Cairo', sans-serif; color: #fff;
+            min-height: 100vh; position: relative;
+        }
+
+        body::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-overlay); z-index: 0;
+        }
+
+        .app-shell { position: relative; z-index: 2; width: 92%; max-width: 450px; margin: 0 auto; padding: 30px 0 120px; }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--accent-gold); text-decoration: none;
+            font-weight: 700; margin-bottom: 30px; transition: 0.3s;
+        }
+        .back-btn:hover { transform: translateX(5px); }
+
+        header h1 { 
+            font-size: 2.2rem; font-weight: 900; margin: 0 0 30px; 
+            border-right: 5px solid var(--accent-gold); padding-right: 15px;
+        }
+
+        .menu-section { margin-bottom: 35px; animation: fadeInUp 0.8s ease forwards; }
+        .section-title { color: var(--accent-gold); font-size: 1.2rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .section-title::after { content: ''; flex: 1; height: 1px; background: rgba(251, 191, 36, 0.2); }
+
+        .item-card {
+            background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 18px; margin-bottom: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s;
+        }
+        .item-card:hover { border-color: rgba(251, 191, 36, 0.3); background: rgba(255,255,255,0.05); }
+
+        .item-info h3 { margin: 0; font-size: 1.1rem; font-weight: 700; }
+        .item-price { color: var(--accent-gold); font-weight: 900; font-size: 0.9rem; margin-top: 4px; }
+
+        .qty-box {
+            display: flex; align-items: center; gap: 12px;
+            background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 15px;
+        }
+        .btn-qty {
+            width: 32px; height: 32px; border-radius: 10px; border: none;
+            background: var(--gold-grad); color: #000; font-weight: 900;
+            cursor: pointer; transition: 0.2s;
+        }
+        .btn-qty:active { transform: scale(0.85); }
+        .count { font-weight: 900; min-width: 20px; text-align: center; }
+
+        .footer-cart {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(7, 11, 20, 0.96); backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border); padding: 20px 0;
+            z-index: 100; display: none; animation: slideUp 0.5s ease;
+        }
+
+        .cart-content { width: 92%; max-width: 450px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .btn-send {
+            background: var(--gold-grad); color: #000; border: none;
+            padding: 12px 25px; border-radius: 15px; font-weight: 900;
+            cursor: pointer;
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="app-shell">
+        <a href="index.html" class="back-btn"> ⬅ القائمة الرئيسية </a>
+
+        <header>
+            <h1>ساندوتشات وسناك</h1>
+        </header>
+
+        <div class="menu-section">
+            <div class="section-title">🥪 ساندوتشات باردة وساخنة</div>
+            
+            <div class="item-card">
+                <div class="item-info">
+                    <h3>كلوب ساندوتش</h3>
+                    <div class="item-price">45 ليرة</div>
+                </div>
+                <div class="qty-box">
+                    <button class="btn-qty" onclick="updateQty('cs', -1, 45, 'كلوب ساندوتش')">-</button>
+                    <span class="count" id="cs">0</span>
+                    <button class="btn-qty" onclick="updateQty('cs', 1, 45, 'كلوب ساندوتش')">+</button>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-info">
+                    <h3>ساندوتش دجاج مشوي</h3>
+                    <div class="item-price">50 ليرة</div>
+                </div>
+                <div class="qty-box">
+                    <button class="btn-qty" onclick="updateQty('ch', -1, 50, 'دجاج مشوي')">-</button>
+                    <span class="count" id="ch">0</span>
+                    <button class="btn-qty" onclick="updateQty('ch', 1, 50, 'دجاج مشوي')">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-section" style="animation-delay: 0.2s;">
+            <div class="section-title">🍟 وجبات خفيفة</div>
+
+            <div class="item-card">
+                <div class="item-info">
+                    <h3>بطاطا مقلية (كبير)</h3>
+                    <div class="item-price">25 ليرة</div>
+                </div>
+                <div class="qty-box">
+                    <button class="btn-qty" onclick="updateQty('ff', -1, 25, 'بطاطا مقلية')">-</button>
+                    <span class="count" id="ff">0</span>
+                    <button class="btn-qty" onclick="updateQty('ff', 1, 25, 'بطاطا مقلية')">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-cart" id="footerCart">
+        <div class="cart-content">
+            <div class="total-price" style="font-size: 1.3rem; font-weight: 900;">الإجمالي: <span id="totalDisplay" style="color: var(--accent-gold);">0</span> ليرة</div>
+            <button class="btn-send" onclick="sendToWhatsApp()">أرسل الطلب 🚀</button>
+        </div>
+    </div>
+
+    <script src="script/script.js"></script>
+</body>
+</html>

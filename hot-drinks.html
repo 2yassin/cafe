@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>المشروبات الساخنة | مود كافيه</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-overlay: rgba(7, 11, 20, 0.92);
+            --accent-gold: #fbbf24;
+            --gold-grad: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background: #070b14 url('https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1000') no-repeat center center fixed;
+            background-size: cover; font-family: 'Cairo', sans-serif; color: #fff;
+            min-height: 100vh; position: relative;
+        }
+
+        body::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-overlay); z-index: 0;
+        }
+
+        .app-shell { position: relative; z-index: 2; width: 92%; max-width: 450px; margin: 0 auto; padding: 30px 0 120px; }
+
+        /* زر الرجوع */
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--accent-gold); text-decoration: none;
+            font-weight: 700; margin-bottom: 30px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { transform: translateX(5px); }
+
+        header h1 { font-size: 2.2rem; font-weight: 900; margin: 0 0 30px; border-right: 5px solid var(--accent-gold); padding-right: 15px; }
+
+        /* حاوية المجموعات */
+        .menu-section { margin-bottom: 35px; animation: fadeInUp 0.8s ease forwards; }
+        .section-title { color: var(--accent-gold); font-size: 1.2rem; font-weight: 900; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .section-title::after { content: ''; flex: 1; height: 1px; background: rgba(251, 191, 36, 0.2); }
+
+        /* كرت الصنف */
+        .item-card {
+            background: var(--glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border); border-radius: 20px;
+            padding: 18px; margin-bottom: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s;
+        }
+        .item-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(251, 191, 36, 0.3); }
+
+        .item-info h3 { margin: 0; font-size: 1.1rem; font-weight: 700; }
+        .item-price { color: var(--accent-gold); font-weight: 900; font-size: 0.9rem; margin-top: 4px; }
+
+        /* أزرار الكمية */
+        .qty-box {
+            display: flex; align-items: center; gap: 12px;
+            background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 15px;
+        }
+        .btn-qty {
+            width: 32px; height: 32px; border-radius: 10px; border: none;
+            background: var(--gold-grad); color: #000; font-weight: 900; font-size: 1.2rem;
+            cursor: pointer; transition: 0.2s;
+        }
+        .btn-qty:active { transform: scale(0.85); }
+        .count { font-weight: 900; min-width: 20px; text-align: center; }
+
+        /* الفاتورة الثابتة بالأسفل */
+        .footer-cart {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(7, 11, 20, 0.95); backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border); padding: 20px 0;
+            z-index: 100; box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+            display: none; /* تظهر فقط عند اختيار صنف */
+            animation: slideUp 0.5s ease;
+        }
+
+        .cart-content { width: 92%; max-width: 450px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .total-price { font-size: 1.3rem; font-weight: 900; }
+        .total-price span { color: var(--accent-gold); }
+
+        .btn-send {
+            background: var(--gold-grad); color: #000; border: none;
+            padding: 12px 25px; border-radius: 15px; font-weight: 900;
+            font-size: 1rem; cursor: pointer; transition: 0.3s;
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="app-shell">
+        <a href="index.html" class="back-btn"> ⬅ العودة للرئيسية </a>
+
+        <header>
+            <h1>المشروبات الساخنة</h1>
+        </header>
+
+        <div class="menu-section">
+            <div class="section-title">☕ ركن القهوة</div>
+            
+            <div class="item-card">
+                <div class="item-info">
+                    <h3>إسبريسو سينجل</h3>
+                    <div class="item-price">15 ليرة</div>
+                </div>
+                <div class="qty-box">
+                    <button class="btn-qty" onclick="updateQty('esp', -1, 15, 'إسبريسو')">-</button>
+                    <span class="count" id="esp">0</span>
+                    <button class="btn-qty" onclick="updateQty('esp', 1, 15, 'إسبريسو')">+</button>
+                </div>
+            </div>
+
+            <div class="item-card">
+                <div class="item-info">
+                    <h3>كابتشينو إيطالي</h3>
+                    <div class="item-price">22 ليرة</div>
+                </div>
+                <div class="qty-box">
+                    <button class="btn-qty" onclick="updateQty('cap', -1, 22, 'كابتشينو')">-</button>
+                    <span class="count" id="cap">0</span>
+                    <button class="btn-qty" onclick="updateQty('cap', 1, 22, 'كابتشينو')">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-section" style="animation-delay: 0.2s;">
+            <div class="section-title">🍃 ركن الشاي والزهورات</div>
+
+            <div class="item-card">
+                <div class="item-info">
+                    <h3>شاي سيلاني فاخر</h3>
+                    <div class="item-price">10 ليرة</div>
+                </div>
+                <div class="qty-box">
+                    <button class="btn-qty" onclick="updateQty('tea', -1, 10, 'شاي أحمر')">-</button>
+                    <span class="count" id="tea">0</span>
+                    <button class="btn-qty" onclick="updateQty('tea', 1, 10, 'شاي أحمر')">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-cart" id="footerCart">
+        <div class="cart-content">
+            <div class="total-price">الإجمالي: <span id="totalDisplay">0</span> ليرة</div>
+            <button class="btn-send" onclick="sendToWhatsApp()">أرسل الطلب 🚀</button>
+        </div>
+    </div>
+<script src="script/script.js"></script>
+</body>
+</html>

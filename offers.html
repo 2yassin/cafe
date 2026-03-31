@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>عروض اليوم | مود كافيه 🎁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-overlay: rgba(7, 11, 20, 0.94);
+            --accent-gold: #fbbf24;
+            --gold-grad: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            --glass: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(251, 191, 36, 0.2);
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background: #070b14 url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1000') no-repeat center center fixed;
+            background-size: cover; font-family: 'Cairo', sans-serif; color: #fff;
+            min-height: 100vh; position: relative;
+        }
+
+        body::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-overlay); z-index: 0;
+        }
+
+        .app-shell { position: relative; z-index: 2; width: 92%; max-width: 450px; margin: 0 auto; padding: 30px 0 120px; }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--accent-gold); text-decoration: none;
+            font-weight: 700; margin-bottom: 30px; transition: 0.3s;
+        }
+
+        header h1 { 
+            font-size: 2.2rem; font-weight: 900; margin: 0 0 10px; 
+            background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle { opacity: 0.6; margin-bottom: 35px; font-size: 0.9rem; }
+
+        /* كرت العرض المطور */
+        .offer-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* شارة العرض */
+        .offer-badge {
+            position: absolute; top: 0; left: 0;
+            background: var(--gold-grad); color: #000;
+            padding: 5px 20px; border-radius: 0 0 20px 0;
+            font-weight: 900; font-size: 0.8rem;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .offer-content h3 { font-size: 1.4rem; margin: 15px 0 5px; color: var(--accent-gold); }
+        .offer-desc { font-size: 0.85rem; opacity: 0.7; margin-bottom: 20px; line-height: 1.6; }
+
+        .offer-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;
+        }
+
+        .price-tag { display: flex; flex-direction: column; }
+        .old-price { text-decoration: line-through; font-size: 0.8rem; opacity: 0.5; }
+        .new-price { font-size: 1.4rem; font-weight: 900; color: #fff; }
+
+        .btn-add-offer {
+            background: var(--gold-grad); color: #000; border: none;
+            padding: 10px 20px; border-radius: 15px; font-weight: 900;
+            cursor: pointer; transition: 0.3s;
+        }
+        .btn-add-offer:active { transform: scale(0.9); }
+
+        /* أنميشن النبض للكرت */
+        .pulse-border {
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* بار الطلب السفلي (نفس البرمجية السابقة) */
+        .footer-cart {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(7, 11, 20, 0.98); backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border); padding: 20px 0;
+            z-index: 100; display: none;
+        }
+        .cart-content { width: 92%; max-width: 450px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+
+    <div class="app-shell">
+        <a href="index.html" class="back-btn"> ⬅ العودة للرئيسية </a>
+
+        <header>
+            <h1>عروض حصرية 🎁</h1>
+            <p class="subtitle">استمتع بأفضل الصفقات اليوم من مود كافيه</p>
+        </header>
+
+        <div class="offer-card pulse-border">
+            <div class="offer-badge">الأكثر مبيعاً 🔥</div>
+            <div class="offer-content">
+                <h3>بوكس السعادة</h3>
+                <p class="offer-desc">قطعة تشيز كيك لوتس + كابتشينو إيطالي كبير برغوة غنية.</p>
+            </div>
+            <div class="offer-footer">
+                <div class="price-tag">
+                    <span class="old-price">57 ليرة</span>
+                    <span class="new-price">45 ليرة</span>
+                </div>
+                <button class="btn-add-offer" onclick="updateQty('o1', 1, 45, 'بوكس السعادة')">أضف للطلب</button>
+            </div>
+        </div>
+
+        <div class="offer-card" style="animation-delay: 0.2s;">
+            <div class="offer-badge">عرض الرفاق 👥</div>
+            <div class="offer-content">
+                <h3>ثنائية الموهيتو</h3>
+                <p class="offer-desc">اشتري 2 موهيتو (أي نكهة) واحصل على الثالث مجاناً.</p>
+            </div>
+            <div class="offer-footer">
+                <div class="price-tag">
+                    <span class="old-price">75 ليرة</span>
+                    <span class="new-price">50 ليرة</span>
+                </div>
+                <button class="btn-add-offer" onclick="updateQty('o2', 1, 50, 'ثنائية الموهيتو')">أضف للطلب</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-cart" id="footerCart">
+        <div class="cart-content">
+            <div style="font-weight: 900; font-size: 1.2rem;">الإجمالي: <span id="totalDisplay" style="color: var(--accent-gold);">0</span> ليرة</div>
+            <button style="background: var(--gold-grad); border:none; padding:12px 20px; border-radius:15px; font-weight:900;" onclick="sendToWhatsApp()">أرسل الطلب 🚀</button>
+        </div>
+    </div>
+
+    <script src="script/script.js"></script>
+</body>
+</html>
